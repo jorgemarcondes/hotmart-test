@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  mongo-seed:
+    build: ./mongo-seed
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
+  api:
+    container_name: api-container
+    restart: always
+    build: ./server
+    ports: 
+      - "8081:8081"
+    depends_on: 
+      - mongodb
+  client:
+    container_name: client-container
+    restart: always
+    build: ./client
+    ports: 
+      - "8080:8080"
+    depends_on: 
+      - api
+  mongodb:
+    container_name: mongo-backend
+    image: mongo
+    expose: 
+      - "27017"
+    ports: 
+      - "27017:27017"
+    volumes: 
+      - apiDB:/data/db
+
+volumes: 
+  apiDB:

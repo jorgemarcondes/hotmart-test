@@ -1,0 +1,16 @@
+POST http://localhost:8088/speaker
+Content-Type: application/json
+
+{
+  "title": "Teste Speaker",
+  "jobTitle": "Oto Job teste",
+  "highlighted": true,
+  "avatar": "aaa/bbb"
+}
+
+###
+GET http://localhost:8081/speakers?highlighted=true
+Accept: application/json
+
+###
+
